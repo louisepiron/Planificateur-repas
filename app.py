@@ -108,51 +108,6 @@ def user_login():
             st.experimental_rerun()
         return st.session_state['username']
 
-Python
-def user_login():
-    st.sidebar.markdown('<div class="sidebar-title">🍽️ Famille Menu</div>', unsafe_allow_html=True)
-    users = charger_users()
-    if 'username' not in st.session_state or not st.session_state['username']:
-        login_mode = st.sidebar.radio("Connexion", ["Se connecter", "Créer un compte"], key="login_radio")
-        if login_mode == "Se connecter":
-            username = st.sidebar.text_input("Nom d'utilisateur", key="login_user")
-            password = st.sidebar.text_input("Mot de passe", type="password", key="login_pw")
-            if st.sidebar.button("Se connecter"):
-                if username in users and users[username]["password"] == password:
-                    st.session_state['username'] = username
-                    st.session_state['just_logged_in'] = True  # <--- AJOUT
-                    st.experimental_rerun()
-                    return
-                else:
-                    st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect.")
-            st.stop()
-        else:
-            new_username = st.sidebar.text_input("Choisir un nom d'utilisateur", key="new_user")
-            new_password = st.sidebar.text_input("Choisir un mot de passe", type="password", key="new_pw")
-            if st.sidebar.button("Créer le compte"):
-                if not new_username or not new_password:
-                    st.sidebar.warning("Remplis tous les champs.")
-                elif new_username in users:
-                    st.sidebar.error("Nom d'utilisateur déjà pris.")
-                else:
-                    users[new_username] = {
-                        "password": new_password,
-                        "favorites": []
-                    }
-                    sauvegarder_users(users)
-                    st.session_state['username'] = new_username
-                    st.session_state['just_logged_in'] = True  # <--- AJOUT
-                    st.experimental_rerun()
-                    return
-            st.stop()
-    else:
-        st.sidebar.markdown(f"👤 <b>{st.session_state['username']}</b>", unsafe_allow_html=True)
-        if st.sidebar.button("Se déconnecter"):
-            st.session_state['username'] = ""
-            st.experimental_rerun()
-            return
-        return st.session_state['username']
-
 # --------- Initialisation session_state ---------
 if 'recipes' not in st.session_state:
     st.session_state['recipes'] = charger_recettes()
@@ -193,7 +148,7 @@ if page == "Accueil":
         """
         <div style="background:linear-gradient(90deg,#fceabb 0,#f8b500 100%);padding:1.5em 2em 1.5em 2em;border-radius:18px;margin-top:1em;">
             <h1 style="color:#2B6CB0;margin-bottom:0.5em;">Bienvenue sur Famille Menu 👋</h1>
-            <h3 style="color:#374151;font-weight:normal;margin-top:0;">Votre assistant pour planifier, cuisiner et profiter !</h3>
+            <h3 style="color:#374151;font-weight:normal;margin-top:0;">Votre assistant pour planifier, cuisiner et profiter&nbsp;!</h3>
         </div>
         """, unsafe_allow_html=True
     )
