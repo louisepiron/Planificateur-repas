@@ -2,7 +2,7 @@ import streamlit as st
 import json
 import os
 import random
-from datetime import date, timedelta
+from datetime import date
 
 # --------- Custom Style for Modern Sidebar ---------
 st.markdown("""
@@ -70,7 +70,6 @@ def sauvegarder_menus(menus):
 def user_login():
     st.sidebar.markdown('<div class="sidebar-title">🍽️ Famille Menu</div>', unsafe_allow_html=True)
     users = charger_users()
-    usernames = list(users.keys())
     if 'username' not in st.session_state or not st.session_state['username']:
         login_mode = st.sidebar.radio("Connexion", ["Se connecter", "Créer un compte"], key="login_radio")
         if login_mode == "Se connecter":
@@ -124,6 +123,7 @@ users = charger_users()  # refresh to get up-to-date favorites
 # --------- Modern Sidebar Navigation ---------
 with st.sidebar:
     menu_options = {
+        "Accueil": "🏠 Accueil",
         "Générateur de menus": "🗓️ Générateur de menus",
         "Ajouter une recette": "➕ Ajouter une recette",
         "Répertoire de recettes": "📖 Répertoire de recettes",
@@ -140,8 +140,33 @@ with st.sidebar:
 
 st.title("Planificateur de repas familial")
 
+# --------- PAGE : Accueil ---------
+if page == "Accueil":
+    st.markdown(
+        """
+        <div style="background:linear-gradient(90deg,#fceabb 0,#f8b500 100%);padding:1.5em 2em 1.5em 2em;border-radius:18px;margin-top:1em;">
+            <h1 style="color:#2B6CB0;margin-bottom:0.5em;">Bienvenue sur Famille Menu 👋</h1>
+            <h3 style="color:#374151;font-weight:normal;margin-top:0;">Votre assistant pour planifier, cuisiner et profiter !</h3>
+        </div>
+        """, unsafe_allow_html=True
+    )
+    st.write(
+        """
+        Ce site vous aide à :
+        - Générer automatiquement des menus variés et adaptés à vos envies.
+        - Gérer votre répertoire de recettes familial.
+        - Ajouter, modifier, supprimer ou marquer vos recettes préférées ⭐.
+        - Adapter les quantités selon le nombre de personnes à table.
+        - Garder une trace de vos menus semaine après semaine pour vous inspirer.
+        - Partager la charge mentale du quotidien en famille !
+
+        👉 Utilisez le menu à gauche pour démarrer.
+        """
+    )
+    st.info("Sélectionnez une page via la barre latérale pour commencer à planifier vos repas ou gérer vos recettes.")
+
 # --------- PAGE : Générateur de menus ---------
-if page == "Générateur de menus":
+elif page == "Générateur de menus":
     st.header("🗓️ Planifier le menu de la semaine")
 
     saison_courante = st.selectbox("Saison actuelle", SAISONS)
@@ -229,7 +254,6 @@ if page == "Générateur de menus":
         history = menus.get(user, {})
         today = date.today()
         key = today.strftime("%Y-%W")  # année-semaine
-        # On sauvegarde aussi le nombre de personnes par repas dans l'historique pour chaque recette
         history[key] = menu
         menus[user] = history
         sauvegarder_menus(menus)
@@ -477,3 +501,4 @@ elif page == "Supprimer une recette":
                 st.warning("Aucune recette supprimée.")
     else:
         st.info("Aucune recette à supprimer.")
+        
