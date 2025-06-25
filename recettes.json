@@ -1,0 +1,411 @@
+[
+  {
+    "name": "Lasagne classique",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 60,
+    "nb_personnes": 4,
+    "saison": [],
+    "tags": [
+      "Viande rouge"
+    ],
+    "ingredients": [
+      "6 ou 9 feuilles de pâte à lasagne",
+      "100 g de parmesan",
+      "650 g haché porc & veau",
+      "400 g tomates en boîte concassées ou coulis",
+      "3 feuilles laurier",
+      "2 branches céleri",
+      "2 oignons",
+      "1 carotte",
+      "1 verre vin rouge",
+      "200g béchamel",
+      "sel",
+      "poivre"
+    ]
+  },
+  {
+    "name": "Pâtes bolognaise classique (al ragu)",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 30,
+    "nb_personnes": 4,
+    "saison": [],
+    "tags": [
+      "Viande rouge"
+    ],
+    "ingredients": [
+      "500g de spaghetti",
+      "100 g de parmesan",
+      "650 g haché porc & veau",
+      "400 g tomates en boîte concassées ou coulis",
+      "3 feuilles laurier",
+      "2 branches céleri",
+      "2 oignons",
+      "1 carotte",
+      "1 verre vin rouge",
+      "sel",
+      "poivre"
+    ]
+  },
+  {
+    "name": "Pains libanais & boeuf façon kefta",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 20,
+    "nb_personnes": 2,
+    "saison": [
+      "Printemps",
+      "Été"
+    ],
+    "tags": [
+      "Viande rouge"
+    ],
+    "ingredients": [
+      "400g haché de boeuf",
+      "4 pains libanais",
+      "Ras el hanout",
+      "Cumin",
+      "Sel",
+      "Poivre",
+      "Accompagnement: houmous, tzatziki, moutabal"
+    ]
+  },
+  {
+    "name": "Tarte salée courgette tomate Burrata",
+    "type": [
+      "Lunch",
+      "Dîner"
+    ],
+    "prep_time": 50,
+    "nb_personnes": 4,
+    "saison": [
+      "Été",
+      "Printemps"
+    ],
+    "tags": [
+      "Végétarien"
+    ],
+    "ingredients": [
+      "1 rouleau de pâte brisée (ou feuilletée si préféré)",
+      "1 c.à.s de moutarde (Dijon ou à l’ancienne, optionnel)",
+      "Pour la garniture :",
+      "2 courgettes moyennes (en rondelles fines)",
+      "250 g de tomates cerises (coupées en deux)",
+      "1 oignon rouge (émincé finement)",
+      "2 gousses d’ail (hachées)",
+      "100 g de comté râpé (ou parmesan, chèvre sec)",
+      "2 c.à.s d’huile d’olive",
+      "Thym frais ou origan (1 c.à.s)",
+      "Sel, poivre, piment d’Espelette (facultatif)",
+      "Pour la crème :",
+      "150 g de ricotta (ou fromage blanc)",
+      "1 œuf",
+      "Zeste de citron jaune (1/2 c.à.c)",
+      "Poivre noir",
+      "Après cuisson :",
+      "1 burrata (125-150 g)",
+      "Feuilles de basilic frais ou roquette",
+      "Filet d’huile d’olive et fleur de sel"
+    ]
+  },
+  {
+    "name": "Burger végé, pommes de terre, salade",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 20,
+    "nb_personnes": 2,
+    "saison": [],
+    "tags": [
+      "Végétarien"
+    ],
+    "ingredients": [
+      "2 burger végétarien (Boni Plan't burger)",
+      "500g de pomme de terre",
+      "1 sachet de salade"
+    ]
+  },
+  {
+    "name": "Pinsa jambon de Parme-mozzarella de bufflonne au pesto de pistaches",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 15,
+    "nb_personnes": 4,
+    "saison": [
+      "Printemps",
+      "Été"
+    ],
+    "tags": [
+      "Viande rouge"
+    ],
+    "ingredients": [
+      "3 tranches de jambon de Parme (charcuterie)",
+      "15 groquette",
+      "1 plant de basilic",
+      "1 éclat d'ail",
+      "2 fond de pinsa (espace fraîcheur)",
+      "1 mozzarella au lait de bufflone",
+      "25 g parmesan",
+      "65 g pistaches pelées non salées",
+      "3 c. à soupe d'huile d’olive vierge extra"
+    ]
+  },
+  {
+    "name": "Traybake au brocoli, aux grenailles et à la feta",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 50,
+    "nb_personnes": 4,
+    "saison": [
+      "Printemps",
+      "Été",
+      "Automne",
+      "Hiver"
+    ],
+    "tags": [
+      "Végétarien"
+    ],
+    "ingredients": [
+      "2 brocolis",
+      "1 courgette",
+      "300G de tomates cerises",
+      "1 citron vert",
+      "1 plant basilic",
+      "600g grenailles",
+      "200g feta",
+      "340g de pois chiches en conserve",
+      "1 CàS moutarde",
+      "1 CàS hariss doux",
+      "4 CàS huile d'holive",
+      "0,5 CàS vinaigre blanc",
+      "Poivre noir",
+      "Sel"
+    ]
+  },
+  {
+    "name": "Pâtes grecques aux courgettes, broccolis et saumon fumé",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 25,
+    "nb_personnes": 4,
+    "saison": [
+      "Printemps",
+      "Été"
+    ],
+    "tags": [
+      "Poisson gras"
+    ],
+    "ingredients": [
+      "140g saumon fumé",
+      "500g brocolis",
+      "1 oignon",
+      "2 éclats d'ail",
+      "2 courgettes",
+      "25 cl crème culinaire",
+      "300g pates grecques",
+      "2 CàS huile d'olive",
+      "60cl eau",
+      "1 cube de bouillon de poisson",
+      "Poivre noir",
+      "Sel"
+    ]
+  },
+  {
+    "name": "Pennes aux tomates confites, à l’émincé de bœuf et au mascarpone",
+    "type": [
+      "Dîner"
+    ],
+    "prep_time": 30,
+    "nb_personnes": 4,
+    "saison": [
+      "Printemps",
+      "Été"
+    ],
+    "tags": [
+      "Viande rouge"
+    ],
+    "ingredients": [
+      "500g haché de boeuf",
+      "600g tomates cerises",
+      "1 fenouil",
+      "0,5 plant de basilic",
+      "1 oignon",
+      "2 éclats d'ail",
+      "250g mascarpone",
+      "400g penne complètes",
+      "70g concentré de tomates",
+      "3 CàS huile d'olive",
+      "1 CàC origan séché",
+      "Poivre noir",
+      "Sel"
+    ]
+  },
+  {
+    "name": "Salade boulgour petits pois feta",
+    "type": [
+      "Lunch",
+      "Dîner"
+    ],
+    "prep_time": 20,
+    "nb_personnes": 3,
+    "saison": [
+      "Printemps",
+      "Été"
+    ],
+    "tags": [
+      "Végétarien"
+    ],
+    "ingredients": [
+      "120g boulgour cru",
+      "250g pois chiches en conserve",
+      "200g petits pois surgelés",
+      "2 concombres",
+      "ciboulette",
+      "Pour la sauce:",
+      "150g petits pois surgelés",
+      "1 citron",
+      "150g feta",
+      "60g huile d'olive",
+      "430g d'eau"
+    ]
+  },
+  {
+    "name": "Pancake avoines",
+    "type": [
+      "Petit déjeuner"
+    ],
+    "prep_time": 20,
+    "nb_personnes": 3,
+    "saison": [],
+    "tags": [
+      "Végétarien"
+    ],
+    "ingredients": [
+      "4 oeufs",
+      "200g de farine d'avoine",
+      "250g de fromage blanc",
+      "150ml de lait (à adapter en fonction de la texture)"
+    ]
+  },
+  {
+    "name": "Salade saumon miel moutarde",
+    "type": [
+      "Lunch",
+      "Dîner"
+    ],
+    "prep_time": 20,
+    "nb_personnes": 2,
+    "saison": [
+      "Printemps",
+      "Été"
+    ],
+    "tags": [
+      "Poisson gras"
+    ],
+    "ingredients": [
+      "2 pavé de saumon badigeonnés de moutarde douce et de miel",
+      "200g de radis",
+      "200g de concombre",
+      "120g couscous perlé cru",
+      "1/2 oignon rouge haché",
+      "Ciboulette fraiche",
+      "Sel",
+      "Poivre",
+      "Pour la sauce:",
+      "2 CàS de moutarge",
+      "1 CàS de miel",
+      "2 CàS d'huile d'olive"
+    ]
+  },
+  {
+    "name": "Quiche saumon poireaux",
+    "type": [
+      "Lunch"
+    ],
+    "prep_time": 50,
+    "nb_personnes": 4,
+    "saison": [],
+    "tags": [
+      "Poisson gras"
+    ],
+    "ingredients": [
+      "6 tranches de saumon fumé",
+      "4 blancs de poireaux",
+      "20cl de crème",
+      "4 oeufs",
+      "1 pate brisée",
+      "1 poignée d'emmental",
+      "Sel",
+      "Poivre"
+    ]
+  },
+  {
+    "name": "Quiche épinards feta",
+    "type": [
+      "Lunch"
+    ],
+    "prep_time": 50,
+    "nb_personnes": 4,
+    "saison": [],
+    "tags": [],
+    "ingredients": [
+      "1 pate brisée",
+      "400g épinards",
+      "1 bloc de feta",
+      "4 oeufs",
+      "20cl de crème",
+      "Sel",
+      "Poivre"
+    ]
+  },
+  {
+    "name": "Quiche lardons champignons",
+    "type": [
+      "Lunch"
+    ],
+    "prep_time": 50,
+    "nb_personnes": 4,
+    "saison": [],
+    "tags": [
+      "Viande rouge"
+    ],
+    "ingredients": [
+      "1 pâte brisée",
+      "4 oeufs",
+      "200g de lardons",
+      "500g de champignons",
+      "1 poignée d'emmental",
+      "Sel",
+      "Poivre"
+    ]
+  },
+  {
+    "name": "Quiche courgette tomates feta",
+    "type": [
+      "Lunch"
+    ],
+    "prep_time": 50,
+    "nb_personnes": 4,
+    "saison": [],
+    "tags": [
+      "Végétarien"
+    ],
+    "ingredients": [
+      "1 pate brisée",
+      "1 bloc de feta",
+      "4 oeufs",
+      "1 courgette",
+      "400g de tomates cerises",
+      "20cl de crème",
+      "sel",
+      "poivre"
+    ]
+  }
+]
