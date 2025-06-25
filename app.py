@@ -22,9 +22,7 @@ st.markdown("""
         margin-top: 1em;
         text-align: center;
     }
-    /* Hide default radio */
     .stRadio > label {display:none;}
-    /* Remove checkbox from radio items (Streamlit 1.38+) */
     [data-testid="stSidebarNav"] svg {display: none;}
     </style>
 """, unsafe_allow_html=True)
@@ -81,7 +79,6 @@ def user_login():
             if st.sidebar.button("Se connecter"):
                 if username in users and users[username]["password"] == password:
                     st.session_state['username'] = username
-                    st.success(f"Bienvenue {username} !")
                     st.experimental_rerun()
                 else:
                     st.sidebar.error("Nom d'utilisateur ou mot de passe incorrect.")
@@ -101,7 +98,6 @@ def user_login():
                     }
                     sauvegarder_users(users)
                     st.session_state['username'] = new_username
-                    st.success(f"Compte créé, bienvenue {new_username} !")
                     st.experimental_rerun()
             st.stop()
     else:
@@ -116,6 +112,8 @@ if 'recipes' not in st.session_state:
     st.session_state['recipes'] = charger_recettes()
 if 'menu_semaine' not in st.session_state:
     st.session_state['menu_semaine'] = {}
+if 'nb_personnes_repas' not in st.session_state:
+    st.session_state['nb_personnes_repas'] = {}
 if 'username' not in st.session_state:
     st.session_state['username'] = ""
 
@@ -151,11 +149,19 @@ if page == "Générateur de menus":
     types_selectionnes = st.multiselect("Types de repas à planifier", TYPES_REPAS, default=TYPES_REPAS)
 
     nb_recettes_par_type = {}
+    nb_personnes_repas = {}
+    st.markdown("**Pour chaque type de repas, indique le nombre de recettes et le nombre de personnes par repas :**")
     for repas_type in types_selectionnes:
-        nb_recettes_par_type[repas_type] = st.number_input(
-            f"Nombre de recettes '{repas_type}' à planifier",
-            min_value=0, max_value=14, value=2, key=f"nb_{repas_type}"
+        cols = st.columns(2)
+        nb_recettes = cols[0].number_input(
+            f"Nombre de recettes '{repas_type}'", min_value=0, max_value=14, value=2, key=f"nb_{repas_type}"
         )
+        nb_personnes = cols[1].number_input(
+            f"Nombre de personnes pour '{repas_type}'", min_value=1, max_value=20, value=4, key=f"pers_{repas_type}"
+        )
+        nb_recettes_par_type[repas_type] = nb_recettes
+        nb_personnes_repas[repas_type] = nb_personnes
+    st.session_state['nb_personnes_repas'] = nb_personnes_repas
 
     st.markdown("**Contraintes nutritionnelles recommandées pour la semaine :**")
     contraintes_defaut = {
@@ -211,7 +217,10 @@ if page == "Générateur de menus":
             if len(selection) < nb_a_choisir:
                 erreurs.append(f"Pas assez de recettes pour {repas_type} ({len(selection)}/{nb_a_choisir}). Ajoutez-en plus !")
 
-            menu[repas_type] = selection
+            menu[repas_type] = [
+                {"recette": recette, "nb_personnes": nb_personnes_repas[repas_type]}
+                for recette in selection
+            ]
 
         st.session_state['menu_semaine'] = menu
 
@@ -220,6 +229,7 @@ if page == "Générateur de menus":
         history = menus.get(user, {})
         today = date.today()
         key = today.strftime("%Y-%W")  # année-semaine
+        # On sauvegarde aussi le nombre de personnes par repas dans l'historique pour chaque recette
         history[key] = menu
         menus[user] = history
         sauvegarder_menus(menus)
@@ -233,15 +243,19 @@ if page == "Générateur de menus":
         users = charger_users()
         for repas_type, recettes_liste in st.session_state['menu_semaine'].items():
             st.write(f"### {repas_type}")
-            for recette in recettes_liste:
+            for data in recettes_liste:
+                recette = data["recette"]
+                nb_personnes = data["nb_personnes"]
                 fav = "⭐" if recette['name'] in users[user].get("favorites", []) else ""
-                st.write(f"- **{recette['name']}** {fav} ({', '.join(recette['tags']) if recette['tags'] else 'Aucun tag'})")
+                st.write(f"- **{recette['name']}** {fav} ({', '.join(recette['tags']) if recette['tags'] else 'Aucun tag'}) — pour {nb_personnes} personnes")
         # Liste de courses
         if st.button("🛒 Générer la liste de courses pour la semaine"):
             ingredients_total = {}
             for recettes_liste in st.session_state['menu_semaine'].values():
-                for recette in recettes_liste:
-                    facteur = 1  # pour 4 personnes par défaut
+                for data in recettes_liste:
+                    recette = data["recette"]
+                    nb_personnes = data["nb_personnes"]
+                    facteur = nb_personnes / recette.get("nb_personnes", 4)
                     for ing in recette['ingredients']:
                         parts = ing.split(" ", 2)
                         if len(parts) >= 3 and parts[0].replace(',', '.').replace('/', '').replace('-', '').replace('.', '').isdigit():
@@ -297,7 +311,7 @@ elif page == "Ajouter une recette":
         name = st.text_input("Nom de la recette", value=st.session_state['ajout_recette']['name'], key="form_name")
         recipe_types = st.multiselect("Types (tu peux en sélectionner plusieurs)", TYPES_REPAS, default=st.session_state['ajout_recette']['recipe_types'], key="form_types")
         prep_time = st.number_input("Temps de préparation (minutes)", min_value=1, max_value=240, value=st.session_state['ajout_recette']['prep_time'], key="form_prep_time")
-        nb_personnes = st.number_input("Nombre de personnes pour la recette", min_value=1, max_value=12, value=st.session_state['ajout_recette']['nb_personnes'], key="form_nb_personnes")
+        nb_personnes = st.number_input("Nombre de personnes pour la recette", min_value=1, max_value=20, value=st.session_state['ajout_recette']['nb_personnes'], key="form_nb_personnes")
         saison = st.multiselect("Saison(s) idéale(s)", SAISONS, default=st.session_state['ajout_recette']['saison'], key="form_saison")
         tags = st.multiselect("Tags nutritionnels", TAGS_NUTRITION, default=st.session_state['ajout_recette']['tags'], key="form_tags")
         ingredients_raw = st.text_area(
@@ -390,14 +404,15 @@ elif page == "Historique des menus":
     if not user_menus:
         st.info("Aucun menu généré pour ce compte.")
     else:
-        # Trier par date de semaine la plus récente
         for week in sorted(user_menus.keys(), reverse=True):
             menu = user_menus[week]
             with st.expander(f"Semaine {week}"):
                 for repas_type, recettes_liste in menu.items():
                     st.write(f"### {repas_type}")
-                    for recette in recettes_liste:
-                        st.write(f"- **{recette['name']}** ({', '.join(recette['tags']) if recette['tags'] else 'Aucun tag'})")
+                    for data in recettes_liste:
+                        recette = data["recette"]
+                        nb_personnes = data["nb_personnes"]
+                        st.write(f"- **{recette['name']}** ({', '.join(recette['tags']) if recette['tags'] else 'Aucun tag'}) — pour {nb_personnes} personnes")
 
 # --------- PAGE : Modifier une recette ---------
 elif page == "Modifier une recette":
@@ -412,7 +427,7 @@ elif page == "Modifier une recette":
                 name = st.text_input("Nom de la recette", value=recette['name'], key="edit_name")
                 recipe_types = st.multiselect("Types (tu peux en sélectionner plusieurs)", TYPES_REPAS, default=recette['type'], key="edit_types")
                 prep_time = st.number_input("Temps de préparation (minutes)", min_value=1, max_value=240, value=recette['prep_time'], key="edit_prep_time")
-                nb_personnes = st.number_input("Nombre de personnes pour la recette", min_value=1, max_value=12, value=recette['nb_personnes'], key="edit_nb_personnes")
+                nb_personnes = st.number_input("Nombre de personnes pour la recette", min_value=1, max_value=20, value=recette['nb_personnes'], key="edit_nb_personnes")
                 saison = st.multiselect("Saison(s) idéale(s)", SAISONS, default=recette['saison'], key="edit_saison")
                 tags = st.multiselect("Tags nutritionnels", TAGS_NUTRITION, default=recette['tags'], key="edit_tags")
                 ingredients_raw = st.text_area(
